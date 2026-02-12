@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previsão do Tempo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1 class="main-title">PREVISÃO DO <br> TEMPO</h1>
+
+    <div class="weather-card">
+        <div class="search-bar">
+            <i class="fa-solid fa-location-dot"></i>
+            <input type="text" placeholder="Digite a cidade..." id="city-input">
+            <div class="search-actions">
+                <i class="fa-solid fa-magnifying-glass" id="search-btn"></i>
+            </div>
+        </div>
+
+        <div id="weather-data">
+            <h2 class="city-name" id="city">--</h2>
+
+            <div class="current-weather">
+                <i class="fa-solid fa-cloud weather-icon" id="weather-icon"></i>
+                <div class="temp-container">
+                    <span class="temperature" id="temperature">--</span>
+                    <span class="unit">°C</span>
+                </div>
+                <p class="condition" id="description">--</p>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <div class="icon-box red"><i class="fa-solid fa-temperature-high"></i></div>
+                    <div class="info">
+                        <span class="label">Temp. max</span>
+                        <span class="value" id="temp-max">--</span>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="icon-box teal"><i class="fa-solid fa-temperature-low"></i></div>
+                    <div class="info">
+                        <span class="label">Temp. min</span>
+                        <span class="value" id="temp-min">--</span>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="icon-box blue"><i class="fa-solid fa-droplet"></i></div>
+                    <div class="info">
+                        <span class="label">Humidade</span>
+                        <span class="value" id="humidity">--</span>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="icon-box purple"><i class="fa-solid fa-wind"></i></div>
+                    <div class="info">
+                        <span class="label">Vento</span>
+                        <span class="value" id="wind">--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
