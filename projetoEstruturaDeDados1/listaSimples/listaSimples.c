@@ -8,7 +8,6 @@ typedef struct pessoa {
     struct pessoa *proximaPessoa;
 } Pessoa;
 
-// --- Protótipos das Funções ---
 void adicionarPessoaBusca(Pessoa **pessoa, char nomePessoa[100], int idadePessoa, int posicaoBuscada);
 void adicionarPessoaCrescente(Pessoa **pessoa, char nomePessoa[100], int idadePessoa);
 void removerPessoa(Pessoa **pessoa, int posicaoBuscada);
@@ -16,15 +15,12 @@ void removerTodasPessoas(Pessoa **pessoa);
 void dividirPessoas(Pessoa **pessoa, Pessoa **novaPessoa, int posicaoBuscada);
 void mostrarPessoas(Pessoa *pessoa);
 
-// --- Função Principal ---
 int main() {
     int continuar = 1;
     int op;
     char nome[100];
     int idade;
     int posicaoBuscada;
-    
-    // Lista principal e lista secundária (para a função dividir)
     Pessoa *raiz = NULL;
     Pessoa *raiz2 = NULL;
 
@@ -68,7 +64,6 @@ int main() {
             printf("Informe a posicao onde a lista sera cortada: ");
             scanf("%d", &posicaoBuscada);
             
-            // Limpa a lista 2 antiga antes de dividir de novo, para evitar lixo
             removerTodasPessoas(&raiz2); 
             
             dividirPessoas(&raiz, &raiz2, posicaoBuscada);
@@ -85,41 +80,31 @@ int main() {
         printf("\nPressione 0 para SAIR ou 1 para CONTINUAR: ");
         scanf("%d", &continuar);
     }
-    
-    // Limpeza de memória antes de fechar o programa
     removerTodasPessoas(&raiz);
     removerTodasPessoas(&raiz2);
     
     return 0;
 }
 
-// --- Implementação das Funções ---
-
 void adicionarPessoaBusca(Pessoa **pessoa, char nomePessoa[100], int idadePessoa, int posicaoBuscada) {
     if ((*pessoa) != NULL && posicaoBuscada > 0) {
-        // Ainda não chegamos na posição e a lista não acabou
         adicionarPessoaBusca(&(*pessoa)->proximaPessoa, nomePessoa, idadePessoa, posicaoBuscada - 1);
     } else {
-        // Chegou na posição desejada ou no fim da lista
         Pessoa *pessoaTemporaria = (Pessoa*) malloc(sizeof(Pessoa));
-        if (pessoaTemporaria == NULL) return; // Erro de alocação
-
+        if (pessoaTemporaria == NULL) return; 
         pessoaTemporaria->idadePessoa = idadePessoa;
         strcpy(pessoaTemporaria->nomePessoa, nomePessoa);
-        
         pessoaTemporaria->proximaPessoa = (*pessoa);
         (*pessoa) = pessoaTemporaria;
     }
 }
 
 void adicionarPessoaCrescente(Pessoa **pessoa, char nomePessoa[100], int idadePessoa) {
-    // Se a pessoa atual existe e é MAIS NOVA que a nova pessoa, avançamos
     if ((*pessoa) != NULL && (*pessoa)->idadePessoa <= idadePessoa) {
         adicionarPessoaCrescente(&(*pessoa)->proximaPessoa, nomePessoa, idadePessoa);
         return;
     }
 
-    // Inserção (quando a lista é vazia ou achamos alguém mais velho)
     Pessoa *pessoaTemporaria = (Pessoa*) malloc(sizeof(Pessoa));
     if (pessoaTemporaria == NULL) return;
 
@@ -136,8 +121,7 @@ void removerPessoa(Pessoa **pessoa, int posicaoBuscada) {
         return;
     }
 
-    if (*pessoa == NULL) return; // Posição inválida
-
+    if (*pessoa == NULL) return; 
     Pessoa *pessoaTemporaria = (*pessoa)->proximaPessoa;
     free(*pessoa);
     *pessoa = pessoaTemporaria;
@@ -156,10 +140,7 @@ void dividirPessoas(Pessoa **pessoa, Pessoa **novaPessoa, int posicaoBuscada) {
         dividirPessoas(&(*pessoa)->proximaPessoa, novaPessoa, posicaoBuscada - 1);
         return;
     }
-
-    // O ponteiro atual vira o início da nova lista
     *novaPessoa = *pessoa;
-    // O ponteiro anterior (da lista original) passa a apontar para NULL
     *pessoa = NULL;
 }
 
@@ -175,4 +156,5 @@ void mostrarPessoas(Pessoa *pessoa) {
         pessoa = pessoa->proximaPessoa;
         i++;
     }
+
 }
